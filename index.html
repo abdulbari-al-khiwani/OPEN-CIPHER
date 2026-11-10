@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d16">
+  <title>OPEN CIPHER | Cryptography Laboratory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">OC</div>
+        <div><strong>OPEN CIPHER</strong><small>CRYPTOGRAPHY LAB</small></div>
+      </div>
+      <div class="side-label">المختبر</div>
+      <button class="nav-item active" data-page="dashboard"><span>⌂</span> لوحة التحكم</button>
+      <button class="nav-item" data-page="classical"><span>⌘</span> الشفرات الكلاسيكية</button>
+      <button class="nav-item" data-page="aes"><span>▣</span> تشفير AES</button>
+      <button class="nav-item" data-page="rsa"><span>◇</span> تشفير RSA</button>
+      <button class="nav-item" data-page="hash"><span>#</span> البصمات الرقمية</button>
+      <button class="nav-item" data-page="files"><span>▤</span> تشفير الملفات</button>
+      <button class="nav-item" data-page="password"><span>✳</span> مولّد كلمات المرور</button>
+      <div class="sidebar-bottom">
+        <div class="local-badge"><i></i> معالجة محلية داخل المتصفح</div>
+        <small>OPEN CIPHER · إصدار تجريبي 0.1</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة">☰</button>
+        <div><span class="eyebrow">ADVANCED CRYPTOGRAPHY LAB</span><h1 id="pageTitle">لوحة التحكم</h1></div>
+        <div class="top-status"><i></i><span>النظام جاهز</span></div>
+      </header>
+
+      <section class="page active" id="dashboard">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="pill">مختبر تشفير محلي ومفتوح المصدر</span>
+            <h2>احمِ بياناتك.<br><em>وافهم التشفير.</em></h2>
+            <p>بيئة عملية لتجربة خوارزميات التشفير والتجزئة، مع تنفيذ العمليات على جهازك دون إرسال النصوص أو الملفات إلى خادم.</p>
+            <button class="primary-btn" data-go="aes">ابدأ التشفير <b>←</b></button>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="lock">⌑<span>●</span></div>
+            <div class="code-float">AES · RSA · SHA-256</div>
+          </div>
+        </div>
+        <div class="section-heading"><div><span class="eyebrow">TOOLS OVERVIEW</span><h2>أدوات المختبر</h2></div><span class="muted">اختر أداة للبدء</span></div>
+        <div class="tool-grid">
+          <button class="tool-card" data-go="classical"><span class="tool-icon">⌘</span><b>الشفرات الكلاسيكية</b><small>Caesar · Vigenère</small></button>
+          <button class="tool-card" data-go="aes"><span class="tool-icon">▣</span><b>AES-256-GCM</b><small>تشفير موثّق للنصوص</small></button>
+          <button class="tool-card" data-go="rsa"><span class="tool-icon">◇</span><b>RSA-OAEP</b><small>مفتاح عام وخاص</small></button>
+          <button class="tool-card" data-go="hash"><span class="tool-icon">#</span><b>Hashing</b><small>SHA-256 · SHA-512</small></button>
+          <button class="tool-card" data-go="files"><span class="tool-icon">▤</span><b>تشفير الملفات</b><small>تشفير وفك تشفير محلي</small></button>
+          <button class="tool-card" data-go="password"><span class="tool-icon">✳</span><b>مولّد كلمات المرور</b><small>عشوائية آمنة تشفيريًا</small></button>
+        </div>
+        <div class="notice"><b>تنبيه أمني</b><p>هذا إصدار تعليمي أولي. استخدم خوارزميات موثوقة ولا تخترع خوارزمية خاصة لحماية بيانات حقيقية. احتفظ بكلمات المرور والمفاتيح في مكان آمن؛ فقدانها قد يعني فقدان القدرة على فك التشفير.</p></div>
+      </section>
+
+      <section class="page" id="classical">
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">CLASSICAL CRYPTOGRAPHY</span><h2>الشفرات الكلاسيكية</h2></div><span class="tag">للتعلم فقط</span></div>
+          <label>نوع الشفرة<select id="classicalType"><option value="caesar">Caesar Cipher — قيصر</option><option value="vigenere">Vigenère Cipher — فيجنير</option></select></label>
+          <div class="form-grid">
+            <label id="shiftWrap">مقدار الإزاحة<input id="shift" type="number" value="3" min="0" max="25"></label>
+            <label id="keyWrap" class="hidden">مفتاح النص<input id="vigKey" type="text" placeholder="مثال: KEY"></label>
+          </div>
+          <label>النص<input id="classicalInput" type="text" placeholder="اكتب نصًا باللغة الإنجليزية"></label>
+          <div class="button-row"><button class="primary-btn" id="classicalEncrypt">تشفير</button><button class="secondary-btn" id="classicalDecrypt">فك التشفير</button></div>
+          <label>النتيجة<textarea id="classicalOutput" rows="3" readonly placeholder="ستظهر النتيجة هنا"></textarea></label>
+          <p class="hint">هذه الشفرات قابلة للكسر ولا تصلح لحماية المعلومات الحساسة.</p>
+        </div>
+      </section>
+
+      <section class="page" id="aes">
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">AUTHENTICATED ENCRYPTION</span><h2>تشفير AES-256-GCM</h2></div><span class="tag safe">موصى به للتطبيقات الحديثة</span></div>
+          <p class="intro">نشتق مفتاحًا بطول 256 بت من عبارة المرور باستخدام PBKDF2، ثم نستخدم AES-GCM للتحقق من سلامة النص أثناء فك التشفير.</p>
+          <label>النص المراد تشفيره<textarea id="aesInput" rows="4" placeholder="اكتب النص هنا..."></textarea></label>
+          <label>عبارة المرور<input id="aesPassword" type="password" autocomplete="new-password" placeholder="استخدم عبارة مرور طويلة وفريدة"></label>
+          <div class="button-row"><button class="primary-btn" id="aesEncrypt">تشفير النص</button><button class="secondary-btn" id="aesDecrypt">فك التشفير</button></div>
+          <label>الناتج<textarea id="aesOutput" rows="5" readonly placeholder="النص المشفر أو النص بعد فك التشفير"></textarea></label>
+          <button class="copy-btn" data-copy="aesOutput">نسخ الناتج</button>
+          <p class="hint">صيغة الناتج OC1. لا تشارك عبارة المرور. إذا فقدتها فلن تستطيع استعادة النص.</p>
+        </div>
+      </section>
+
+      <section class="page" id="rsa">
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">PUBLIC KEY CRYPTOGRAPHY</span><h2>تشفير RSA-OAEP</h2></div><span class="tag">تجريبي</span></div>
+          <p class="intro">أنشئ زوج مفاتيح RSA محليًا. استخدم المفتاح العام للتشفير والمفتاح الخاص لفك التشفير. هذه الأداة مخصصة للنصوص القصيرة فقط.</p>
+          <button class="primary-btn" id="rsaGenerate">إنشاء زوج مفاتيح 2048-bit</button>
+          <div class="key-grid">
+            <label>المفتاح العام (PEM)<textarea id="rsaPublic" rows="5" readonly placeholder="سيظهر المفتاح العام هنا"></textarea></label>
+            <label>المفتاح الخاص (PEM)<textarea id="rsaPrivate" rows="5" readonly placeholder="سيظهر المفتاح الخاص هنا"></textarea></label>
+          </div>
+          <div class="warning"><b>تحذير مهم:</b> المفتاح الخاص سرّي للغاية. لا ترسله لأحد ولا تحفظه في مكان عام. هذا النموذج لا يوفر إدارة مفاتيح إنتاجية.</div>
+          <label>النص<input id="rsaInput" type="text" placeholder="نص قصير باللغة الإنجليزية"></label>
+          <div class="button-row"><button class="primary-btn" id="rsaEncrypt">تشفير بالمفتاح العام</button><button class="secondary-btn" id="rsaDecrypt">فك بالمفتاح الخاص</button></div>
+          <label>الناتج<textarea id="rsaOutput" rows="4" readonly></textarea></label>
+        </div>
+      </section>
+
+      <section class="page" id="hash">
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">ONE-WAY DIGEST</span><h2>البصمات الرقمية</h2></div><span class="tag">SHA-2</span></div>
+          <label>النص المراد حساب بصمته<textarea id="hashInput" rows="4" placeholder="اكتب أي نص..."></textarea></label>
+          <label>الخوارزمية<select id="hashType"><option>SHA-256</option><option>SHA-512</option></select></label>
+          <button class="primary-btn" id="hashRun">حساب البصمة</button>
+          <label>البصمة الرقمية<textarea id="hashOutput" rows="4" readonly></textarea></label>
+          <button class="copy-btn" data-copy="hashOutput">نسخ البصمة</button>
+          <p class="hint">التجزئة ليست تشفيرًا: لا يوجد مفتاح لفك SHA وإرجاع النص الأصلي. لا تستخدم SHA مباشرة لتخزين كلمات المرور.</p>
+        </div>
+      </section>
+
+      <section class="page" id="files">
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">LOCAL FILE PROTECTION</span><h2>تشفير الملفات</h2></div><span class="tag safe">على جهازك</span></div>
+          <p class="intro">اختر ملفًا لتشفيره بعبارة مرور. سينتج ملف بامتداد .ocipher. لفك التشفير اختر ملف OCIPHER وأدخل عبارة المرور نفسها.</p>
+          <label>اختيار ملف<input id="fileInput" type="file"></label>
+          <label>عبارة المرور<input id="filePassword" type="password" autocomplete="new-password" placeholder="عبارة مرور قوية"></label>
+          <div class="button-row"><button class="primary-btn" id="fileEncrypt">تشفير الملف وتنزيله</button><button class="secondary-btn" id="fileDecrypt">فك التشفير وتنزيل الملف</button></div>
+          <div id="fileStatus" class="result-box">لم يتم اختيار ملف بعد.</div>
+          <p class="hint">لا تغلق الصفحة أثناء معالجة الملفات الكبيرة. احتفظ بنسخة احتياطية من الملف المشفر وعبارة المرور بشكل منفصل.</p>
+        </div>
+      </section>
+
+      <section class="page" id="password">
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">SECURE RANDOMNESS</span><h2>مولّد كلمات المرور</h2></div><span class="tag safe">Crypto.getRandomValues</span></div>
+          <label>طول كلمة المرور <div class="range-line"><input id="passLength" type="range" min="12" max="64" value="20"><output id="passLengthValue">20</output></div></label>
+          <div class="checks"><label><input id="useUpper" type="checkbox" checked> أحرف كبيرة A-Z</label><label><input id="useLower" type="checkbox" checked> أحرف صغيرة a-z</label><label><input id="useNumbers" type="checkbox" checked> أرقام 0-9</label><label><input id="useSymbols" type="checkbox" checked> رموز خاصة</label></div>
+          <button class="primary-btn" id="generatePassword">توليد كلمة مرور</button>
+          <label>كلمة المرور الناتجة<input id="passwordOutput" type="text" readonly></label>
+          <button class="copy-btn" data-copy="passwordOutput">نسخ كلمة المرور</button>
+        </div>
+      </section>
+
+      <footer>OPEN CIPHER <span>·</span> تعلّم التشفير بمسؤولية — جميع العمليات تتم محليًا قدر الإمكان.</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
